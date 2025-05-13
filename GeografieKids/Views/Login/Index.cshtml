@@ -1,0 +1,20 @@
+@{
+    ViewBag.Title = "Autentificare";
+}
+
+<h2>Autentificare</h2>
+
+@if (ViewBag.Eroare != null)
+{
+    <p style="color:red">@ViewBag.Eroare</p>
+}
+
+<form method="post" action="/Login/Autentificare">
+    <label>Username:</label><br />
+    <input type="text" name="username" required minlength="3" /><br /><br />
+
+    <label>Parolã:</label><br />
+    <input type="password" name="parola" required minlength="5" /><br /><br />
+
+    <button type="submit">Conectare</button>
+</form>

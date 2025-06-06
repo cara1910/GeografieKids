@@ -1,0 +1,47 @@
+@{
+    ViewBag.Title = "Test finalizat";
+}
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet" />
+
+<div class="d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+    <div class="card p-5 text-center shadow-lg" style="background-color: rgba(255, 255, 255, 0.9); max-width: 500px;">
+        <div class="mb-4">
+            <i class="bi bi-trophy-fill" style="font-size: 4rem; color: #ffc107;"></i>
+        </div>
+        <h2 class="mb-3">Felicitãri!</h2>
+        <p class="lead">Ai terminat testul cu succes!</p>
+
+        <div class="my-3">
+            <h4>Scorul tãu:</h4>
+            <p class="fs-4 fw-bold text-success">
+                @ViewBag.Scor / @ViewBag.Total
+            </p>
+        </div>
+
+        <a href="@Url.Action("Index", "SelectareTest")" class="btn back-home-btn mt-2">
+            <i class="bi bi-arrow-left-circle me-2"></i> Înapoi la meniu
+        </a>
+    </div>
+</div>
+
+<style>
+    .back-home-btn {
+        display: inline-block;
+        padding: 0.6rem 1.5rem;
+        font-size: 1.1rem;
+        font-weight: 600;
+        border: none;
+        border-radius: 30px;
+        background-color: #74AFAD !important;
+        color: white !important;
+        transition: all 0.2s ease-in-out;
+        white-space: nowrap;
+        min-width: 180px;
+    }
+
+        .back-home-btn:hover {
+            background-color: #558C89 !important;
+            transform: translateY(-2px);
+        }
+</style>

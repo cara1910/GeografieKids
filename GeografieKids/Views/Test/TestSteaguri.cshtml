@@ -1,0 +1,73 @@
+@model GeografieKids.Models.IntrebareSteag
+
+@{
+    ViewBag.Title = "Test Steaguri Europa";
+}
+
+<main class="full-screen-view text-center">
+    <h2 class="mb-4">Care este capitala acestei tari?</h2>
+
+    <div class="mb-4">
+        <img src="@Url.Content("~/Content/steaguri/" + Model.Continent.ToLower() + "/" + Model.ImagineSteag)"
+             alt="@Model.NumeTara"
+             class="img-thumbnail shadow-sm"
+             style="max-width: 300px; border-radius: 12px;" />
+
+    </div>
+
+    <div class="d-flex justify-content-center flex-wrap gap-3 mb-4">
+        @foreach (var optiune in Model.Variante)
+        {
+            <button class="quiz-option" onclick="trimiteRaspuns('@optiune')">@optiune</button>
+        }
+    </div>
+
+    <div id="rezultat" class="fs-4 mt-3"></div>
+</main>
+
+<style>
+    .quiz-option {
+        display: inline-block;
+        padding: 0.6rem 1.5rem;
+        font-size: 1.1rem;
+        font-weight: 600;
+        border: none;
+        border-radius: 30px;
+        background-color: #74AFAD;
+        color: white;
+        transition: all 0.2s ease-in-out;
+        white-space: nowrap;
+        min-width: 120px;
+        margin: 0.4rem;
+    }
+
+        .quiz-option:hover {
+            background-color: #558C89;
+            transform: translateY(-2px);
+        }
+</style>
+
+@section Scripts {
+    <script>
+    function trimiteRaspuns(raspuns) {
+        fetch('@Url.Action("VerificaRaspunsSteag", "Test")', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ raspuns: raspuns })
+        })
+        .then(res => res.json())
+        .then(data => {
+            document.getElementById("rezultat").innerText = data.corect ? "Corect!" : "Gresit!";
+            setTimeout(() => {
+                if (data.finalizat) {
+                    window.location.href = '@Url.Action("Final", "Test")';
+                } else {
+                    location.reload();
+                }
+            }, 1300);
+        });
+    }
+    </script>
+}

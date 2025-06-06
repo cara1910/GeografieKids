@@ -1,0 +1,24 @@
+@{
+    ViewBag.Title = "Alege Continentul";
+}
+
+<div class="container text-center mt-5">
+    <h2 class="mb-4">Alege un continent</h2>
+
+    <form method="post" class="row justify-content-center g-4">
+        @foreach (var continent in new[] {
+            new { Nume = "Europa", Img = "europa.png" },
+            new { Nume = "Asia", Img = "asia.png" },
+            new { Nume = "Africa", Img = "africa.png" },
+            new { Nume = "America", Img = "america.jpg" }
+        })
+        {
+            <div class="col-6 col-md-4 col-lg-3">
+                <button type="submit" name="continent" value="@continent.Nume" class="continent-btn w-100 p-2">
+                    <img src="@Url.Content("~/Content/img/" + continent.Img)" alt="@continent.Nume" style="max-height: 100px;" />
+                    <div class="mt-2 fw-semibold">@continent.Nume</div>
+                </button>
+            </div>
+        }
+    </form>
+</div>

@@ -1,10 +1,7 @@
-﻿<Utilizatori>
-	<Utilizator>
-		<Username>ana</Username>
-		<Parola>parola123</Parola>
-	</Utilizator>
-	<Utilizator>
-		<Username>ion</Username>
-		<Parola>geografie</Parola>
-	</Utilizator>
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Utilizatori>
+  <Utilizator>
+    <Username>ana</Username>
+    <Parola>parola123</Parola>
+  </Utilizator>
 </Utilizatori>

@@ -1,20 +1,78 @@
 @{
     ViewBag.Title = "Autentificare";
 }
+<div class="login_pg container py-5">
 
-<h2>Autentificare</h2>
+    @if (ViewBag.Eroare != null)
+    {
+        <div class="alert alert-danger text-center">@ViewBag.Eroare</div>
+    }
+    @if (ViewBag.Succes != null)
+    {
+        <div class="alert alert-success text-center">@ViewBag.Succes</div>
+    }
 
-@if (ViewBag.Eroare != null)
-{
-    <p style="color:red">@ViewBag.Eroare</p>
-}
+    <div class="d-flex justify-content-center gap-4 flex-wrap">
+        <!-- caseta 1: creare cont -->
+        <div class="card p-4 shadow" style="min-width: 280px; background-color: rgba(255, 255, 255, 0.7)">
+            <h4 class="text-center">Creare cont</h4>
+            <form action="/Login/Register" method="post">
+                <div class="mb-3">
+                    <label>Username nou:</label>
+                    <input type="text" class="form-control" name="UsernameNou" required />
+                </div>
+                <div class="mb-3">
+                    <label>Parolã:</label>
+                    <input type="password" class="form-control" name="ParolaNoua" required />
+                </div>
+                <button type="submit" class="btn btn-custom w-100">Creeazã cont</button>
+            </form>
+        </div>
 
-<form method="post" action="/Login/Autentificare">
-    <label>Username:</label><br />
-    <input type="text" name="username" required minlength="3" /><br /><br />
+        <!-- caseta 2: autentificare -->
+        <div class="card p-4 shadow" style="min-width: 280px; background-color: rgba(255, 255, 255, 0.7)">
+            <h4 class="text-center">Autentificare</h4>
+            <form action="/Login/Index" method="post">
+                <div class="mb-3">
+                    <label>Username:</label>
+                    <input type="text" class="form-control" name="Username" required />
+                </div>
+                <div class="mb-3">
+                    <label>Parola:</label>
+                    <input type="password" class="form-control" name="Parola" required />
+                </div>
+                <button type="submit" class="btn btn-custom w-100">Conectare</button>
+            </form>
+        </div>
 
-    <label>Parolã:</label><br />
-    <input type="password" name="parola" required minlength="5" /><br /><br />
+        <!-- caseta 3: stergere cont -->
+        <div class="card p-4 shadow" style="min-width: 280px; background-color: rgba(255, 255, 255, 0.7)">
+            <h4 class="text-center">Stergere cont</h4>
+            <form action="/Login/Delete" method="post">
+                <div class="mb-3">
+                    <label>Username de sters:</label>
+                    <input type="text" class="form-control" name="UsernameSters" required />
+                </div>
+                <button type="submit" class="btn btn-danger w-100">Sterge cont</button>
+            </form>
+        </div>
+    </div>
 
-    <button type="submit">Conectare</button>
-</form>
+    <style>
+        .btn-custom {
+            background-color: #74AFAD;
+            color: white;
+            border: none;
+        }
+
+            .btn-custom:hover {
+                background-color: #558C89;
+                color: white;
+            }
+
+        .form-control:focus {
+            border-color: #74AFAD;
+            box-shadow: 0 0 0 0.2rem rgba(116, 175, 173, 0.25);
+        }
+    </style>
+</div>

@@ -1,44 +1,102 @@
-﻿using GeografieKids.Models;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
-using System.Xml.Serialization;
+using System.Xml.Linq;
+using GeografieKids.Models;
 
 namespace GeografieKids.Controllers
 {
     public class LoginController : Controller
     {
+        private string xmlPath = System.Web.HttpContext.Current.Server.MapPath("~/App_Data/utilizatori.xml");
+
+        [HttpGet]
         public ActionResult Index()
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult Autentificare(string username, string parola)
+        public ActionResult Index(string Username, string Parola)
         {
-            List<Utilizator> utilizatori = CitesteUtilizatori();
+            var utilizatori = CitesteUtilizatoriDinXML();
 
-            foreach (var u in utilizatori)
+            var user = utilizatori.FirstOrDefault(u => u.Username == Username && u.Parola == Parola);
+
+            if (user != null)
             {
-                if (u.Username == username && u.Parola == parola)
-                {
-                    Session["utilizator"] = u.Username;
-                    return RedirectToAction("Selectare", "Quiz");
-                }
+                Session["User"] = user.Username;
+                return RedirectToAction("Index", "SelectareTest");
             }
 
-            ViewBag.Eroare = "Username sau parola incorecte.";
+            ViewBag.Eroare = "Username sau parolă incorecte!";
+            return View();
+        }
+
+        private List<Utilizator> CitesteUtilizatoriDinXML()
+        {
+            var utilizatori = new List<Utilizator>();
+            var doc = XDocument.Load(xmlPath);
+
+            foreach (var elem in doc.Descendants("Utilizator"))
+            {
+                utilizatori.Add(new Utilizator
+                {
+                    Username = elem.Element("Username").Value,
+                    Parola = elem.Element("Parola").Value
+                });
+            }
+
+            return utilizatori;
+        }
+        [HttpPost]
+        public ActionResult Register(string UsernameNou, string ParolaNoua)
+        {
+            var utilizatori = CitesteUtilizatoriDinXML();
+
+            // verificam daca username-ul exista deja
+            if (utilizatori.Any(u => u.Username == UsernameNou))
+            {
+                ViewBag.Eroare = "Acest utilizator exista deja!";
+                return View("Index");
+            }
+
+            // adaugam in XML
+            var doc = XDocument.Load(xmlPath);
+            var root = doc.Element("Utilizatori");
+
+            root.Add(new XElement("Utilizator",
+                new XElement("Username", UsernameNou),
+                new XElement("Parola", ParolaNoua)));
+
+            doc.Save(xmlPath);
+
+            ViewBag.Succes = "Cont creat cu succes!";
             return View("Index");
         }
 
-        private List<Utilizator> CitesteUtilizatori()
+        [HttpPost]
+        public ActionResult Delete(string UsernameSters)
         {
-            string path = Server.MapPath("~/App_Data/utilizatori.xml");
-            XmlSerializer serializer = new XmlSerializer(typeof(List<Utilizator>), new XmlRootAttribute("Utilizatori"));
-            using (FileStream fs = new FileStream(path, FileMode.Open))
+            var doc = XDocument.Load(xmlPath);
+            var root = doc.Element("Utilizatori");
+
+            var userToRemove = root.Elements("Utilizator")
+                .FirstOrDefault(u => (string)u.Element("Username") == UsernameSters);
+
+            if (userToRemove != null)
             {
-                return (List<Utilizator>)serializer.Deserialize(fs);
+                userToRemove.Remove();
+                doc.Save(xmlPath);
+                ViewBag.Succes = "Cont sters cu succes!";
             }
+            else
+            {
+                ViewBag.Eroare = "Utilizatorul nu exista!";
+            }
+
+            return View("Index");
         }
+
     }
 }

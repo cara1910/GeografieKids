@@ -1,0 +1,132 @@
+﻿
+/* ========== Font and background ========== */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Fredoka', sans-serif;
+    background: linear-gradient(135deg, #c2e9fb, #d9f3e4) !important;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+   
+}
+
+/* ========== Cards & buttons ========== */
+.card {
+    background-color: rgba(255, 255, 255, 0.85);
+    border-radius: 18px;
+    padding: 2rem;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+.btn-custom {
+    background-color: #74AFAD;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+    transition: all 0.3s ease-in-out;
+}
+
+    .btn-custom:hover {
+        background-color: #558C89;
+        transform: scale(1.05);
+    }
+
+/* ========== Continent & test buttons ========== */
+.continent-btn, .test-btn {
+    border: none;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 1rem;
+    width: 200px;
+    height: 200px;
+    border-radius: 14px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: #333;
+}
+
+    .continent-btn:hover, .test-btn:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    }
+
+    .continent-btn img, .test-btn img {
+        max-height: 100px;
+        object-fit: contain;
+    }
+
+/* ========== Responsive ========== */
+@media (max-width: 768px) {
+    .continent-btn, .test-btn {
+        width: 150px;
+        height: 150px;
+        margin-bottom: 16px;
+    }
+
+    .card {
+        width: 90%;
+        padding: 1rem;
+    }
+}
+
+/* ========== Footer ========== */
+footer {
+    background-color: transparent !important;
+    color: #333;
+    padding: 10px 0;
+    font-size: 14px;
+    text-align: center;
+    box-shadow: none;
+}
+main.full-screen-view {
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    overflow: hidden;
+}
+
+#svgContainer {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+}
+
+    #svgContainer svg {
+        width: auto;
+        height: auto;
+        max-height: 85vh;
+        max-width: 95vw;
+        cursor: pointer;
+    }
+
+.quiz-option {
+    display: inline-block;
+    padding: 0.6rem 1.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 30px;
+    background-color: #74AFAD !important;
+    color: white !important;
+    transition: all 0.2s ease-in-out;
+    white-space: nowrap;
+    min-width: 120px;
+    margin: 0.4rem;
+}
+
+    .quiz-option:hover {
+        background-color: #558C89 !important;
+        transform: translateY(-2px);
+    }

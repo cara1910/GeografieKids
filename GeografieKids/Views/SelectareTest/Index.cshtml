@@ -1,0 +1,27 @@
+@{
+    ViewBag.Title = "Alege tipul de test";
+}
+
+<div class="container text-center mt-5">
+    <h2 class="mb-4">Alege tipul de test</h2>
+
+    <form method="post" class="row justify-content-center g-4">
+        <div class="col-12 col-md-5">
+            <button type="submit" name="test" value="Harta" class="test-btn w-100 p-3" style="height: auto; min-height: 280px;">
+                <img src="@Url.Content("~/Content/img/hartaa.jpg")" alt="Test Harta"
+                     style="height: 180px; width: auto; margin-bottom: 10px;" />
+                <h4>Test Harta</h4>
+                <p class="text-muted">Alege tarile pe harta în functie de intrebare.</p>
+            </button>
+        </div>
+
+        <div class="col-12 col-md-5">
+            <button type="submit" name="test" value="Steaguri" class="test-btn w-100 p-3" style="height: auto; min-height: 280px;">
+                <img src="@Url.Content("~/Content/img/steagurii.jpg")" alt="Test Steaguri"
+                     style="height: 180px; width: auto; margin-bottom: 10px;" />
+                <h4>Test Steaguri</h4>
+                <p class="text-muted">Recunoaste steagurile tarilor dintr-un continent ales.</p>
+            </button>
+        </div>
+    </form>
+</div>

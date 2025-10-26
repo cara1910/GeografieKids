@@ -4,4 +4,8 @@
     <Username>ana</Username>
     <Parola>parola123</Parola>
   </Utilizator>
+  <Utilizator>
+    <Username>ebu</Username>
+    <Parola>ebu</Parola>
+  </Utilizator>
 </Utilizatori>
